@@ -1,0 +1,40 @@
+{ "name": "tree-npm",
+  "version": "1.0.0",
+  "description": "Tree package for practice",
+  "homepage": "https://github.com/antrikshsaini/tree-npm",
+  "bugs": {
+    "url": "https://github.com/antrikshsaini/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/antrikshsaini/tree-npm.git"
+  },
+  "license": "UNLICENSED",
+  "author": "antrikshsaini",
+  "type": "module",
+    "exports": "./dist/index.js",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "/dist"
+    ],
+  "devDependencies": {
+    "typescript": "^4.0.3",
+    "gts": "^3.1.0",
+    "@types/node": "^14.11.2"
+  },
+  "scripts": {
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "fix": "gts fix",
+    "prepare": "npm run compile",
+    "pretest": "npm run compile",
+    "posttest": "npm run lint",
+    "build": "tsc",
+    "test": "jest"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  }
+}
