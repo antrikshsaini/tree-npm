@@ -5,9 +5,9 @@
  * Type Declaration
  */
 
-type Tree<A> = Leaf<A> | Branch<A>;
+export type Tree<A> = Leaf<A> | Branch<A>;
 
-class Leaf<A> {
+export class Leaf<A> {
     tag: 'leaf' = 'leaf';
     readonly value: A;
 
@@ -16,7 +16,7 @@ class Leaf<A> {
     }
 }
 
-class Branch<A> {
+export class Branch<A> {
     tag: 'branch' = 'branch';
     readonly left: Tree<A>;
     readonly right: Tree<A>;
@@ -31,10 +31,10 @@ class Branch<A> {
  * Type Guards
  */
 
-const isLeaf = <A>(t: Tree<A>): t is Leaf<A> => {
+export const isLeaf = <A>(t: Tree<A>): t is Leaf<A> => {
     return t.tag === 'leaf';
 };
-const isBranch = <A>(t: Tree<A>): t is Branch<A> => {
+export const isBranch = <A>(t: Tree<A>): t is Branch<A> => {
     return t.tag === 'branch';
 };
 
@@ -45,7 +45,7 @@ const isBranch = <A>(t: Tree<A>): t is Branch<A> => {
  *
  */
 
-const size = <A>(tree: Tree<A>): number => {
+export const size = <A>(tree: Tree<A>): number => {
     if (isLeaf(tree)) {
         return 1;
     } else {
@@ -75,7 +75,7 @@ console.log(size(tree)); // 3
  *
  */
 
-const max = (tree: Tree<number>): number => {
+export const max = (tree: Tree<number>): number => {
     let currentMax = 0;
     if (isLeaf(tree)) {
         currentMax = currentMax >= tree.value ? currentMax : tree.value;
@@ -109,7 +109,7 @@ console.log(max(tree)); //9
  *
  */
 
-const depth = <A>(tree: Tree<A>): number => {
+export const depth = <A>(tree: Tree<A>): number => {
     if (isLeaf(tree)) {
         return 0;
     } else {
@@ -146,7 +146,7 @@ console.log(depth(tree)); // 3
  *
  */
 
-const map = <A, B>(f: (a: A) => B, tree: Tree<A>): Tree<B> => {
+export const map = <A, B>(f: (a: A) => B, tree: Tree<A>): Tree<B> => {
     if (isLeaf(tree)) {
         return new Leaf(f(tree.value));
     } else {
@@ -156,7 +156,7 @@ const map = <A, B>(f: (a: A) => B, tree: Tree<A>): Tree<B> => {
 
 // curry form
 
-const mapCurry =
+export const mapCurry =
     <A, B>(f: (a: A) => B) =>
         (tree: Tree<A>): Tree<B> => {
             if (isLeaf(tree)) {
@@ -201,7 +201,7 @@ Branch { tag: 'branch',
  *
  */
 
-class BranchOptional<A> {
+export class BranchOptional<A> {
     tag: 'branchOptional' = 'branchOptional';
     readonly left?: TreeOptional<A>;
     readonly right?: TreeOptional<A>;
@@ -212,13 +212,13 @@ class BranchOptional<A> {
     }
 }
 
-type TreeOptional<A> = Leaf<A> | BranchOptional<A>
+export type TreeOptional<A> = Leaf<A> | BranchOptional<A>
 
-const isBranchOptional = <A>(t: TreeOptional<A>): t is BranchOptional<A> => {
+export const isBranchOptional = <A>(t: TreeOptional<A>): t is BranchOptional<A> => {
     return t.tag === 'branchOptional';
 };
 
-const filter = <A>(
+export const filter = <A>(
     f: (val: A) => boolean,
     tree?: TreeOptional<A>
 ): TreeOptional<A> | undefined => {
@@ -269,7 +269,7 @@ Branch {
  *
  */
 
-const zip = <A, B>(
+export const zip = <A, B>(
     tree1: Tree<A>,
     tree2: Tree<B>
 ): Tree<Array<A | B>> | undefined => {

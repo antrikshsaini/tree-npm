@@ -1,24 +1,23 @@
-"use strict";
-class Leaf {
+export class Leaf {
     constructor(value) {
         this.tag = 'leaf';
         this.value = value;
     }
 }
-class Branch {
+export class Branch {
     constructor(left, right) {
         this.tag = 'branch';
         this.left = left;
         this.right = right;
     }
 }
-const isLeaf = (t) => {
+export const isLeaf = (t) => {
     return t.tag === 'leaf';
 };
-const isBranch = (t) => {
+export const isBranch = (t) => {
     return t.tag === 'branch';
 };
-const size = (tree) => {
+export const size = (tree) => {
     if (isLeaf(tree)) {
         return 1;
     }
@@ -26,7 +25,7 @@ const size = (tree) => {
         return 1 + size(tree.left) + size(tree.right);
     }
 };
-const max = (tree) => {
+export const max = (tree) => {
     let currentMax = 0;
     if (isLeaf(tree)) {
         currentMax = currentMax >= tree.value ? currentMax : tree.value;
@@ -38,7 +37,7 @@ const max = (tree) => {
     }
     return currentMax;
 };
-const depth = (tree) => {
+export const depth = (tree) => {
     if (isLeaf(tree)) {
         return 0;
     }
@@ -48,7 +47,7 @@ const depth = (tree) => {
         return depthLeft >= depthRight ? depthLeft : depthRight;
     }
 };
-const map = (f, tree) => {
+export const map = (f, tree) => {
     if (isLeaf(tree)) {
         return new Leaf(f(tree.value));
     }
@@ -56,7 +55,7 @@ const map = (f, tree) => {
         return new Branch(map(f, tree.left), map(f, tree.right));
     }
 };
-const mapCurry = (f) => (tree) => {
+export const mapCurry = (f) => (tree) => {
     if (isLeaf(tree)) {
         return new Leaf(f(tree.value));
     }
@@ -64,17 +63,17 @@ const mapCurry = (f) => (tree) => {
         return new Branch(map(f, tree.left), map(f, tree.right));
     }
 };
-class BranchOptional {
+export class BranchOptional {
     constructor(option) {
         this.tag = 'branchOptional';
         this.left = option.left;
         this.right = option.right;
     }
 }
-const isBranchOptional = (t) => {
+export const isBranchOptional = (t) => {
     return t.tag === 'branchOptional';
 };
-const filter = (f, tree) => {
+export const filter = (f, tree) => {
     if (!tree)
         return;
     if (isBranchOptional(tree)) {
@@ -87,7 +86,7 @@ const filter = (f, tree) => {
         return !f(tree.value) ? tree : undefined;
     }
 };
-const zip = (tree1, tree2) => {
+export const zip = (tree1, tree2) => {
     if (isLeaf(tree1) && isLeaf(tree2)) {
         return new Leaf([tree1.value, tree2.value]);
     }
